@@ -306,7 +306,12 @@ function pushNotif(text){
 }
 function handleMsg(text){
   messages.push({text,ts:Date.now()});
-  pushNotif(text);
+  showToast(text);
+  if(window.AndroidBridge){
+    AndroidBridge.sendNotification(text);
+  } else {
+    pushNotif(text);
+  }
   showTab("messages");
 }
 
